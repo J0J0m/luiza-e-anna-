@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Supremo - Cafés Especiais</title>
+    <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+
+    <header class="store-header">
+        <div class="cart-icon" title="Ver Carrinho" onclick="toggleCart()">
+            ☕ <span id="cart-counter" class="counter">0</span>
+        </div>
+        <h1>Café Supremo</h1>
+        <p>A arte do café em sua xícara.</p>
+    </header>
+
+    <div class="product-grid">
+
+        <!-- Produto 1: Café Bourbon Amarelo -->
+        <div class="product-card item-bourbon" data-product-id="1" onclick="showProductDetails(1)">
+            <div class="image-container">
+                <img src="imagens/bourbon.jpg" alt="Café Bourbon Amarelo" class="product-image">
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">Bourbon Amarelo</h3>
+                <p class="product-price">R$ 45,00</p>
+                <button class="buy-button" 
+                        onclick="event.stopPropagation(); addToCart(this)" 
+                        data-name="Bourbon Amarelo" 
+                        data-price="45.00">COMPRAR</button>
+            </div>
+        </div>
+
+        <!-- Produto 2: Café Catuaí Vermelho -->
+        <div class="product-card item-catuai" data-product-id="2" onclick="showProductDetails(2)">
+            <div class="image-container">
+                <img src="imagens/catuai.jpg" alt="Café Catuaí Vermelho" class="product-image">
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">Catuaí Vermelho</h3>
+                <p class="product-price">R$ 38,50</p>
+                <button class="buy-button" 
+                        onclick="event.stopPropagation(); addToCart(this)" 
+                        data-name="Catuaí Vermelho" 
+                        data-price="38.50">COMPRAR</button>
+            </div>
+        </div>
+
+        <!-- Produto 3: Café Geisha -->
+        <div class="product-card item-geisha" data-product-id="3" onclick="showProductDetails(3)">
+            <div class="image-container">
+                <img src="imagens/geisha.jpg" alt="Café Geisha" class="product-image">
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">Geisha</h3>
+                <p class="product-price">R$ 89,90</p>
+                <button class="buy-button" 
+                        onclick="event.stopPropagation(); addToCart(this)" 
+                        data-name="Geisha" 
+                        data-price="89.90">COMPRAR</button>
+            </div>
+        </div>
+
+        <!-- Produto 4: Café Blend da Casa -->
+        <div class="product-card item-blend" data-product-id="4" onclick="showProductDetails(4)">
+            <div class="image-container">
+                <img src="imagens/blend.jpg" alt="Café Blend da Casa" class="product-image">
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">Blend da Casa</h3>
+                <p class="product-price">R$ 32,00</p>
+                <button class="buy-button" 
+                        onclick="event.stopPropagation(); addToCart(this)" 
+                        data-name="Blend da Casa" 
+                        data-price="32.00">COMPRAR</button>
+            </div>
+        </div>
+
+        <!-- Produto 5: Café Orgânico -->
+        <div class="product-card item-organico" data-product-id="5" onclick="showProductDetails(5)">
+            <div class="image-container">
+                <img src="imagens/organico.jpg" alt="Café Orgânico" class="product-image">
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">Orgânico</h3>
+                <p class="product-price">R$ 55,00</p>
+                <button class="buy-button" 
+                        onclick="event.stopPropagation(); addToCart(this)" 
+                        data-name="Orgânico" 
+                        data-price="55.00">COMPRAR</button>
+            </div>
+        </div>
+
+        <!-- Produto 6: Cápsulas Espresso -->
+        <div class="product-card item-capsulas" data-product-id="6" onclick="showProductDetails(6)">
+            <div class="image-container">
+                <img src="imagens/capsulas.jpg" alt="Cápsulas Espresso" class="product-image">
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">Cápsulas Espresso</h3>
+                <p class="product-price">R$ 29,90</p>
+                <button class="buy-button" 
+                        onclick="event.stopPropagation(); addToCart(this)" 
+                        data-name="Cápsulas Espresso" 
+                        data-price="29.90">COMPRAR</button>
+            </div>
+        </div>
+
+    </div>
+    
+    <!-- Modal de Detalhes do Produto -->
+    <div id="product-modal" class="product-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeProductDetails()">&times;</button>
+            <div class="modal-body">
+                <div class="modal-image-section">
+                    <img id="modal-product-image" src="" alt="Café" class="modal-product-image">
+                </div>
+                <div class="modal-info-section">
+                    <h2 id="modal-product-name" class="modal-product-name"></h2>
+                    <p id="modal-product-price" class="modal-product-price"></p>
+                    <div class="modal-description">
+                        <h3>Notas de Degustação</h3>
+                        <p id="modal-product-description"></p>
+                    </div>
+                    <div class="modal-details">
+                        <h3>Detalhes do Grão</h3>
+                        <ul id="modal-product-details"></ul>
+                    </div>
+                    <button id="modal-buy-button" class="modal-buy-button" onclick="addToCartFromModal()">
+                        ADICIONAR AO CARRINHO
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="cart-panel" class="cart-panel">
+        <h2>☕ Seu Carrinho ☕</h2>
+        <button class="close-btn" onclick="toggleCart()">X</button>
+        <ul id="cart-list" class="cart-list">
+            <li class="empty-message">Nenhum café selecionado...</li>
+        </ul>
+        <div class="cart-footer">
+            <p>Total: <span id="cart-total">R$ 0,00</span></p>
+            <button class="checkout-btn">Finalizar Pedido</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
